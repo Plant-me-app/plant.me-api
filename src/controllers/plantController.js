@@ -11,7 +11,8 @@ exports.getAllPlants = async (req, res) => {
  
 exports.createPlant = async (req, res) => {
   try {
-    const plant = await plantService.createPlant(req.body);
+    const createdDate = new Date();
+    const plant = await plantService.createPlant({...req.body, createdDate});
     res.json({ data: plant, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });

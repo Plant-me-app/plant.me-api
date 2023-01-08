@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 
 const plantSchema = new Schema({
   name: String,
-  species: String,
+  species: {},
   size: String,
-  image: String
+  image: Number,
+  createdDate: Date
 });
  
 module.exports = mongoose.model("Plant", plantSchema);
