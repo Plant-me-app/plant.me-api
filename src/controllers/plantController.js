@@ -1,5 +1,5 @@
 const plantService = require("../services/plantService");
-const { getWaterHistory } = require("../utils/history");
+const { getTaskHistory } = require("../utils/history");
  
 exports.getAllPlants = async (req, res) => {
   try {
@@ -65,16 +65,18 @@ exports.deletePlant = async (req, res) => {
   }
 };
 
-exports.updatePlantWater = async (req, res) => {
+exports.updatePlantTask = async (req, res) => {
   try {
-    const updatedHistory = await getWaterHistory(req.params.id);
+    const taskBody = req.body.task;
+    const task = taskBody.toLowerCase();
+    const updatedHistory = await getTaskHistory(req.params.id, task);
     const lastDateUpdated = updatedHistory.slice(-1);
     const details = await plantService.getPlantDetails(req.params.id);
-    const water = {
+    const taskData = {
         history: updatedHistory,
         lastDate: lastDateUpdated
     }
-    const plant = await plantService.updatePlant(req.params.id, {details: {...details, water: water}});
+    const plant = await plantService.updatePlant(req.params.id, {details: {...details, [task]: taskData}});
     res.json({ data: plant, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
