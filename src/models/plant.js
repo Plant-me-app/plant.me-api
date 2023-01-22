@@ -6,7 +6,9 @@ const plantSchema = new Schema({
   species: {},
   size: String,
   image: Number,
-  createdDate: Date
+  createdDate: Date,
+  details: {
+  }
 });
  
 module.exports = mongoose.model("Plant", plantSchema);

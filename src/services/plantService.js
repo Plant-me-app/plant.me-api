@@ -7,6 +7,7 @@ exports.getAllPlants = async () => {
 exports.createPlant = async (plant) => {
   return await PlantModel.create(plant);
 };
+
 exports.getPlantById = async (id) => {
   return await PlantModel.findById(id);
 };
@@ -18,3 +19,8 @@ exports.updatePlant = async (id, plant) => {
 exports.deletePlant = async (id) => {
   return await PlantModel.findByIdAndDelete(id);
 };
+
+exports.getHistoryByPlantId = async (id) => {
+  const plant = await PlantModel.findById(id);
+  return plant.details.water.history;
+}
