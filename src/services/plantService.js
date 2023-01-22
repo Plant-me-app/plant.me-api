@@ -22,5 +22,16 @@ exports.deletePlant = async (id) => {
 
 exports.getHistoryByPlantId = async (id) => {
   const plant = await PlantModel.findById(id);
-  return plant.details.water.history;
+  const tasksHistory = { 
+    water: plant.details.water.history, 
+    soil: plant.details.soil.history, 
+    light: plant.details.light.history, 
+    fertilizer: plant.details.fertilizer.history
+  }
+  return tasksHistory;
+}
+
+exports.getPlantDetails = async (id) => {
+  const plant = await PlantModel.findById(id);
+  return plant.details;
 }
