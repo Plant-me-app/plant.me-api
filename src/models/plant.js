@@ -8,6 +8,22 @@ const plantSchema = new Schema({
   image: Number,
   createdDate: Date,
   details: {
+    water: {
+      lastDate: "",
+      history: []
+    },
+    soil: {
+        lastDate: "",
+        history: []
+    },
+    light: {
+        lastDate: "",
+        history: []
+    },
+    fertilizer: {
+        lastDate: "",
+        history: []
+    }
   }
 });
  

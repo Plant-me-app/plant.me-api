@@ -1,10 +1,18 @@
 
 const plantService = require("../services/plantService");
 
-
-    exports.getHistory = async (id) => {
+    const getHistory = async (id, task) => {
         const history = await plantService.getHistoryByPlantId(id);
+        return await history[task];
+    }
+
+    const getDate = () => {
         const date = new Date();
-        history.push(date.toISOString())
-        return history
+        return date.toISOString();
+    }
+
+    exports.getWaterHistory = async (id) => {
+        const history = await getHistory(id, 'water');
+        history.push(getDate());
+        return history;
     }
