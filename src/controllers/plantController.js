@@ -1,5 +1,6 @@
 const plantService = require("../services/plantService");
 const { getTaskHistory } = require("../utils/history");
+const { getTaskCicle } = require("../utils/taskCicle");
  
 exports.getAllPlants = async (req, res) => {
   try {
@@ -78,6 +79,20 @@ exports.updatePlantTask = async (req, res) => {
     }
     const plant = await plantService.updatePlant(req.params.id, {details: {...details, [task]: taskData}});
     res.json({ data: plant, status: "success" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+exports.getPlantCicle = async (req, res) => {
+  try {
+    const plant = await plantService.getPlantById(req.params.id);
+    const isWaterButtonEnabled = getTaskCicle(plant, "water");
+    const isSoilButtonEnabled = getTaskCicle(plant, "soil");
+    const isLightButtonEnabled = getTaskCicle(plant, "light");
+    const isFertilizerButtonEnabled = getTaskCicle(plant, "fertilizer");
+    res.json({ isWaterButtonEnabled, isSoilButtonEnabled, isLightButtonEnabled, isFertilizerButtonEnabled, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
