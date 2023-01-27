@@ -35,3 +35,9 @@ exports.getPlantDetails = async (id) => {
   const plant = await PlantModel.findById(id);
   return plant.details;
 }
+
+exports.getHistoryByTask = async (id, task) => {
+  const plant = await PlantModel.findById(id);
+  const tasksHistory = plant.details[task].history;
+  return tasksHistory;
+}
