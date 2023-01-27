@@ -5,8 +5,14 @@ const getDiffDays = (now, last) => {
 
 exports.getTaskCicle = (plant, task) => {
     const lastDate = plant.details[task].lastDate[0];
-    const formattedLastDate = new Date(lastDate).setHours(0, 0, 0, 0);
-    const dateNow = new Date().setHours(0, 0, 0, 0);
+    let formattedLastDate = "";
+    if(lastDate) {
+        let arr = lastDate.split("/");
+        formattedLastDate = new Date(`${arr[1]}/${arr[0]}/${arr[2]}`);
+    }
+    const dateNow = new Date()
+    dateNow.setHours(0, 0, 0, 0);
+    var diffDays = getDiffDays(dateNow, formattedLastDate)
     const cicle = plant.species[task]?.cicle;
 
     if(!lastDate) return true;
@@ -29,7 +35,6 @@ exports.getTaskCicle = (plant, task) => {
         
         case "trimestral":
             var diffDays = getDiffDays(dateNow, formattedLastDate);
-            console.log('diffDays', diffDays > 90);
             return diffDays > 90;
 
         case "anual":

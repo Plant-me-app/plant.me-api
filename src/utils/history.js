@@ -8,7 +8,7 @@ const plantService = require("../services/plantService");
 
     const getDate = () => {
         const date = new Date();
-        return date.toISOString();
+        return date.toLocaleDateString('pt-br');
     }
 
     exports.getTaskHistory = async (id, task) => {

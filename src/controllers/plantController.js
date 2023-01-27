@@ -69,8 +69,16 @@ exports.deletePlant = async (req, res) => {
 exports.updatePlantTask = async (req, res) => {
   try {
     const taskBody = req.body.task;
+    const toRemove = req.body?.toRemove;
     const task = taskBody.toLowerCase();
-    const updatedHistory = await getTaskHistory(req.params.id, task);
+    let updatedHistory = [];
+    if(toRemove) {
+      const history = await plantService.getHistoryByTask(req.params.id, task);
+      history.pop();
+      updatedHistory = history;
+    } else {
+      updatedHistory = await getTaskHistory(req.params.id, task);
+    }
     const lastDateUpdated = updatedHistory.slice(-1);
     const details = await plantService.getPlantDetails(req.params.id);
     const taskData = {
