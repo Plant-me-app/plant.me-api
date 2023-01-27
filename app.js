@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 const plantRouter = require("./src/routes/plantRoutes");
+const userRouter = require("./src/routes/userRoutes")
  
 //middleware
 app.use(express.json());
@@ -11,6 +12,7 @@ app.listen(3001, () => {
 });
 
 app.use("/api/plants", plantRouter);
+app.use("/api/users", userRouter);
 
 const mongoose = require("mongoose");
 //configure mongoose
