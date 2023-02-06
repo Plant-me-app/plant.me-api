@@ -1,5 +1,6 @@
 const plantService = require("../services/plantService");
 const { getTaskHistory } = require("../utils/history");
+const { getScoreUpdated } = require("../utils/score");
 const { getTaskCicle } = require("../utils/taskCicle");
  
 exports.getAllPlants = async (req, res) => {
@@ -14,6 +15,10 @@ exports.getAllPlants = async (req, res) => {
 exports.createPlant = async (req, res) => {
   try {
     const createdDate = new Date();
+    const score = {
+      level: 0,
+      points: 0,
+    };
     const details = {
       water: {
         lastDate: "",
@@ -32,7 +37,7 @@ exports.createPlant = async (req, res) => {
         history: []
       }
     }
-    const plant = await plantService.createPlant({...req.body, createdDate, details});
+    const plant = await plantService.createPlant({...req.body, createdDate, details, score});
     res.json({ data: plant, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -105,3 +110,24 @@ exports.getPlantCicle = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.getPlantScore = async (req, res) => {
+  try {
+    const score = await plantService.getPlantScore(req.params.id);
+    res.json({data: score, status: "success"});
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+exports.updatePlantScore = async (req, res) => {
+  try {
+    const score = await plantService.getPlantScore(req.params.id);
+    const toRemove = req.body.toRemove;
+    const newScore = getScoreUpdated(score, toRemove);
+    const plant = await plantService.updatePlant(req.params.id, {score: newScore});
+    res.json({ data: plant.score, status: "success" })
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
