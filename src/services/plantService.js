@@ -41,3 +41,9 @@ exports.getHistoryByTask = async (id, task) => {
   const tasksHistory = plant.details[task].history;
   return tasksHistory;
 }
+
+exports.getPlantScore = async (id) => {
+  const plant = await PlantModel.findById(id);
+  const score = plant.score;
+  return score;
+}

@@ -7,6 +7,10 @@ const plantSchema = new Schema({
   size: String,
   image: Number,
   createdDate: Date,
+  score: {
+    level: Number,
+    points: Number,
+  },
   details: {
     water: {
       lastDate: "",
@@ -23,7 +27,7 @@ const plantSchema = new Schema({
     fertilizer: {
         lastDate: "",
         history: []
-    }
+    },
   }
 });
  
