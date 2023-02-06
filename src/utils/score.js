@@ -39,3 +39,13 @@ exports.getScoreUpdated = (score, toRemove) => {
     if (points >= 10) points = 0;
     return {level: newLevel, points}
 }
+
+exports.getPointsToNextLevel = (score) => {
+    let level = score.level;
+    let points = score.points;
+
+    if(level === 0) {
+        return 5 - points;
+    }
+    return 10 - points;
+}

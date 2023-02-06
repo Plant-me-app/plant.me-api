@@ -10,6 +10,7 @@ const plantSchema = new Schema({
   score: {
     level: Number,
     points: Number,
+    pointsToNextLevel: Number,
   },
   details: {
     water: {
