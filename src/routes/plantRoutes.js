@@ -8,7 +8,8 @@ const {
   updatePlantTask,
   getPlantCicle,
   getPlantScore,
-  updatePlantScore
+  updatePlantScore,
+  getHistoryById
 } = require("../controllers/PlantController");
  
 const router = express.Router();
@@ -18,5 +19,6 @@ router.route("/:id").get(getPlantById).put(updatePlant).delete(deletePlant);
 router.route('/:id/task').put(updatePlantTask);
 router.route('/:id/task/enable').get(getPlantCicle);
 router.route('/:id/score').get(getPlantScore).put(updatePlantScore);
+router.route('/:id/history').get(getHistoryById);
  
 module.exports = router;

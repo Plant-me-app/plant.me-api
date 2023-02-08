@@ -133,3 +133,13 @@ exports.updatePlantScore = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 }
+
+exports.getHistoryById = async (req, res) => {
+  try {
+    const history = await plantService.getHistoryByPlantId(req.params.id);
+    res.json({ data: history, status: "success" })
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+
+}
