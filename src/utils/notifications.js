@@ -20,7 +20,7 @@ exports.getNotifications = async () => {
         };
 
         soilNotification = {
-            title: "Trocar terra da Planta!",
+            title: "Trocar Terra!",
             text: `Corra para trocar a terra de ${plant.name} antes que as pragas ataquem!`,
             task: "soil",
         };
