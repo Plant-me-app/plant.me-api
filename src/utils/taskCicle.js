@@ -13,7 +13,7 @@ exports.getTaskCicle = (plant, task) => {
     const dateNow = new Date()
     dateNow.setHours(0, 0, 0, 0);
     var diffDays = getDiffDays(dateNow, formattedLastDate)
-    const cicle = plant.species[task]?.cicle;
+    const cicle = plant.species[task]['cicle'];
 
     if(!lastDate) return true;
 
