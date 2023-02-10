@@ -19,7 +19,7 @@ app.use("/api/notifications", notificationRouter);
 const mongoose = require("mongoose");
 //configure mongoose
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.0",
+  process.env.MONGODB_URI || "mongodb://mongo:27017/plant-me-api?directConnection=true",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

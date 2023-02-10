@@ -10,7 +10,7 @@ const {
   getPlantScore,
   updatePlantScore,
   getHistoryById
-} = require("../controllers/PlantController");
+} = require("../controllers/plantController.js");
  
 const router = express.Router();
  

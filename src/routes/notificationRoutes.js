@@ -6,7 +6,7 @@ const {
   updateNotification,
   deleteNotification,
   getAllPlantsNotifications
-} = require("../controllers/NotificationController");
+} = require("../controllers/notificationController.js");
  
 const router = express.Router();
  

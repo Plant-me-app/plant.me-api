@@ -2,9 +2,11 @@
   "name": "plant.me-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "dev": "nodemon app.js",
+    "docker:build": "docker build -f ./Dockerfile .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

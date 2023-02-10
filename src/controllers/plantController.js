@@ -75,7 +75,7 @@ exports.deletePlant = async (req, res) => {
 exports.updatePlantTask = async (req, res) => {
   try {
     const taskBody = req.body.task;
-    const toRemove = req.body?.toRemove;
+    const toRemove = req.body['toRemove'];
     const task = taskBody.toLowerCase();
     let updatedHistory = [];
     if(toRemove) {
