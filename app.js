@@ -18,20 +18,31 @@ app.use("/api/notifications", notificationRouter);
 
 const mongoose = require("mongoose");
 //configure mongoose
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://mongo:27017/plant-me-api?directConnection=true",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Connected to MongoDB");
-    }
-  }
-);
+// mongoose.connect(
+//   process.env.MONGODB_URI || "mongodb://mongo:27017/plant-me-api?directConnection=true",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   },
+//   (err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Connected to MongoDB");
+//     }
+//   }
+// );
+
+const connectWithRetry = () => {
+  mongoose.connect('mongodb://mongo:27017/plant-me-api?directConnection=true', {useNewUrlParser: true })
+  .then(() => console.log('succesfully connected to DB'))
+  .catch((err) => {
+    console.log(err);
+    setTimeout(connectWithRetry, 5000);
+  });
+}
+
+connectWithRetry()
 
 
 module.exports = app;
